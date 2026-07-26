@@ -1,6 +1,21 @@
 # Fuel-Cell-Modeling
-This is the python based model to simulate and optimize the membrane thickness of Electrolyte of Lithium-Aluminum Air/Hybrid Fuel Cell, Also it creates the voltage loss curves
-A1: config/constants.py
+# Physics-Based PEM Fuel Cell Transport Model
+
+An analytical, continuum-level Python model developed for my Master's Thesis to optimize Polymer Electrolyte Membrane (PEM) thickness and deconvolute localized voltage losses.
+
+## Framework
+The computational model dynamically couples two foundational electrochemical domains:
+1. **Mass & Ion Transport:** Governed by the **Nernst-Planck flux equations** across the membrane.
+2. **Electrochemical Kinetics:** Solved using **Butler-Volmer kinetics** at the catalyst layers.
+
+The simulation isolates and calculates distinct overpotential losses (activation, ohmic, and concentration) based on variable operational parameters including temperature, relative humidity, and current density.
+
+## File Structure
+* `model_main.py` - Core execution script containing the differential equation solvers.
+* `parameters.json` - Input parameters (temperature, membrane properties, kinetics constants).
+* `plots/` - Generated polarization curves and voltage loss breakdowns.
+
+**A1: config/constants.py**
  
 """
 constants.py
@@ -22,7 +37,8 @@ class Constants:
  
  
 CONST = Constants()
-A2: config/parameters.py
+
+**A2: config/parameters.py**
  
 """
 parameters.py
@@ -126,7 +142,8 @@ class TemperatureParameters:
  
  
 TEMP = TemperatureParameters()
-A3: models/nernst.py
+
+**A3: models/nernst.py**
  
 """
 nernst.py
@@ -159,7 +176,8 @@ class NernstModel:
         E0 = 2.32
  
         return E0 * np.ones_like(temperature)
-A4: models/conductivity.py
+
+**A4: models/conductivity.py**
  
 
 """
@@ -208,7 +226,7 @@ class ConductivityModel:
 
  
 
-A5: models/activation.py
+**A5: models/activation.py**
  
 """
 activation.py
@@ -275,7 +293,8 @@ class ActivationModel:
         )
  
         return eta
-A6: models/concentration.py
+
+**A6: models/concentration.py**
  
 """
 concentration.py
@@ -346,7 +365,8 @@ class ConcentrationModel:
  
  
         return eta
-A7: models/electrolyte.py
+
+**A7: models/electrolyte.py**
  
 """
 electrolyte.py
@@ -415,7 +435,8 @@ class ElectrolyteModel:
             current_density *
             ASR
         )
-A8: models/cell_voltage.py
+
+**A8: models/cell_voltage.py**
  
 """
 cell_voltage.py
@@ -561,7 +582,8 @@ class CellVoltageModel:
             "Cell Voltage":
                 Vcell
         }
-A9: analysis/polarization.py
+
+**A9: analysis/polarization.py**
  
 """
 polarization.py
@@ -656,7 +678,9 @@ class PolarizationAnalysis:
  
  
         return data
-A10: Main Execution Script (run_model.py)
+
+
+**A10: Main Execution Script (run_model.py)**
  
 """
 run_model.py
