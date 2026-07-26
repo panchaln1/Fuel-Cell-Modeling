@@ -15,6 +15,7 @@ The simulation isolates and calculates distinct overpotential losses (activation
 * `parameters.json` - Input parameters (temperature, membrane properties, kinetics constants).
 * `plots/` - Generated polarization curves and voltage loss breakdowns.
 
+
 **A1: config/constants.py**
  
 """
